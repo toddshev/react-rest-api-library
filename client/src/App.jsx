@@ -11,13 +11,11 @@ import Courses from './components/Courses.jsx';
 const App = () => {
   return (
     <>
-      <Courses />
-      {/* <Routes>
+      <Routes>
         <Route path = "/" element = {<Courses />} />
-      </Routes> */}
+      </Routes>
     </>
   )
-
 }
 
 
