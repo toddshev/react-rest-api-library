@@ -21,8 +21,6 @@ const App = () => {
 }
 
 
-
-
 export default App
 
 {/* <Routes>
