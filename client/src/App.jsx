@@ -4,18 +4,27 @@ import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header.jsx'
 import Courses from './components/Courses.jsx';
-//import CourseDetails from './components/CourseDetails.jsx';
-//import SignUp from './components/SignUp.jsx';
-//import SignIn from './components/SignIn.jsx';
+import CourseDetails from './components/CourseDetails.jsx';
+import CourseCreate from './components/CourseCreate.jsx';
+import CourseUpdate from './components/CourseUpdate.jsx';
+import CourseDelete from './components/CourseDelete.jsx';
+import SignUp from './components/SignUp.jsx';
+import SignIn from './components/SignIn.jsx';
 
 const App = () => {
   return (
     <>
-    <Header />
-    <Routes>
-      <Route path = "/" element = {<Courses />} />
-    </Routes>
-    {/* <Courses /> */}
+      <Header />
+      <Routes>
+        <Route path = "/" element = {<Courses />} />
+        <Route path = "/courses/:id" element = {<CourseDetails />} />
+        <Route path = "/courses/:id/update" element = {<CourseUpdate />} />
+        <Route path = "/courses" element = {<CourseCreate />} />
+        <Route path = "/courses/:id/delete" element = {<CourseDelete />} />
+        <Route path = "/users/signup" element = {<SignUp />} />
+        <Route path = "/users/signin" element = {<SignIn />} />
+      </Routes>
+      {/* <Courses /> */}
     </>
   )
 }
