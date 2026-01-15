@@ -1,29 +1,33 @@
+import { useEffect, useState } from 'react';
+//import { useNavigate } from 'react-router-dom';
 import Header from './Header.jsx';
 
-async function getCourseList() {
-    const response = await fetch('http://localhost:5000/api/courses');
-    const data = await response.json();
-    return data;
-}
-const courses = await getCourseList();
-
-const courseArray = [];
-
-for (let course of courses) {
-    courseArray.push(
-      <a className="course--module course--link" href={`/course/${course.id}`} key = {course.id}>
-        <h2 className="course--label">Course</h2>
-        <h3 className="course--title">{course.title}</h3>
-      </a>
-    );
-}
-
 const Courses = () => {
+  //  const navigate = useNavigate();
+    const [courses, setCourses] = useState([]);
+  //  const [courseArray, setCourseArray] = useState([]);
+
+
+    useEffect(() => {
+        const fetchCourses = async () => {
+            const response = await fetch('http://localhost:5000/api/courses');
+            const data = await response.json();
+            return data; 
+        }
+        fetchCourses().then(data => setCourses(data));
+    }, []);
+
+
     return (
         <>
         <Header />
         <div className="wrap main--grid">
-            {courseArray}
+            {courses.map(course => (
+                <a className="course--module course--link" href={`/course/${course.id}`} key={course.id}>
+                    <h2 className="course--label">Course</h2>
+                    <h3 className="course--title">{course.title}</h3>
+                </a>
+            ))}
             <a className="course--module course--add--module" href="create-course.html">
                 <span className="course--add--title">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
