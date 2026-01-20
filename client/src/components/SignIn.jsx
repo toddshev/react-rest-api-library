@@ -1,9 +1,8 @@
-import './Header.jsx';
+
 
 const SignIn = () => {
     return (
         <>
-        <Header />
         <div className="form--centered" >
                 <h2>Sign In</h2>
                 <form>

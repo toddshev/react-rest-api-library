@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Courses = () => {
     const [courses, setCourses] = useState([]);
 
-    
+
     useEffect(() => {
         const fetchCourses = async () => {
             try {
@@ -17,6 +17,8 @@ const Courses = () => {
         };
         fetchCourses();
     }, []);
+
+    if (!courses) return <p>Loading...</p>
 
     return (
         <div className="wrap main--grid">

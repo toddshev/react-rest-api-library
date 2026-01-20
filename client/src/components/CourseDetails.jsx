@@ -21,14 +21,17 @@ const CourseDetails = () => {
         fetchCourses();
     }, []);
 
+    if (!courseDetails) return <p>Loading...</p>;
+
+  
     console.log(courseDetails);
     return (
         <>
         <div className="actions--bar">
                 <div className="wrap">
-                    <Link className="button" href={`#`}>Update Course</Link>
-                    <Link className="button" href={`#`}>Delete Course</Link>
-                    <Link className="button button-secondary" href="#">Return to List</Link>
+                    <Link className="button" href={`/courses/${id}/update`}>Update Course</Link>
+                    <Link className="button" href={`/courses/${id}/delete`}>Delete Course</Link>
+                    <Link className="button button-secondary" href={"/"}>Return to List</Link>
                 </div>
             </div>
             
@@ -45,21 +48,11 @@ const CourseDetails = () => {
                         <div>
                             <h3 className="course--detail--title">Estimated Time</h3>
                             <p>{courseDetails.estimatedTime}</p>
-
                             <h3 className="course--detail--title">Materials Needed</h3>
-                           {/* This keeps breaking everything.  No matter what I do it blows up the page
-                           I then have to go back and re-do everything that was working before */}
                             <ul className="course--detail--list">
-                                <li>1/2 x 3/4 inch parting strip</li>
-                                <li>1 x 2 common pine</li>
-                                <li>1 x 4 common pine</li>
-                                <li>1 x 10 common pine</li>
-                                <li>1/4 inch thick lauan plywood</li>
-                                <li>Finishing Nails</li>
-                                <li>Sandpaper</li>
-                                <li>Wood Glue</li>
-                                <li>Wood Filler</li>
-                                <li>Minwax Oil Based Polyurethane</li>
+                                {courseDetails.materialsNeeded ? courseDetails.materialsNeeded.split('\n').map((item, index) => 
+                                    <li key = {index}>{item.indexOf("*") === 0 ? item.slice(1, item.length) : item}</li> // slice to remove extra asterisk
+                                ): null}                     
                             </ul>
                         </div>
                     </div>
