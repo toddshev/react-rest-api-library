@@ -1,29 +1,18 @@
+const Error = ( {errors} ) => {
+    let display = null;
 
-
-const Error = () => {
-    return (
-        <>
-        <div id="root">
-        <header>
-            <div className="wrap header--flex">
-                <h1 className="header--logo"><a href="index.html">Courses</a></h1>
-                <nav>
-                    <ul className="header--signedin">
-                        <li>Welcome, Joe Smith!</li>
-                        <li><a href="sign-out.html">Sign Out</a></li>
+    if (errors.length) {
+        display = (
+            <div>
+                <h2 className="validation--errors--label">Validation errors</h2>
+                <div className="validation-errors">
+                    <ul>
+                        {errors.map((error, i) => <li key={i}>{error}</li>)}
                     </ul>
-                </nav>
+                </div>
             </div>
-        </header>
-        <main>
-            <div class="wrap">
-                <h2>Error</h2>
-                <p>Sorry! We just encountered an unexpected error.</p>
-            </div>
-        </main>
-    </div>
-    </>
-    )
+        );
+    }
+    return display;
 }
-
 export default Error;
