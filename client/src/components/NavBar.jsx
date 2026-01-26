@@ -8,8 +8,7 @@ const NavBar = () => {
     const { authUser, actions } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const handleUserSignOut = (e) => {
-        e.preventDefault();
+    const handleUserSignOut = () => {
         actions.signOut();
         navigate('/');
     }
@@ -17,15 +16,15 @@ const NavBar = () => {
     return (
         <nav>
             {!authUser ?
-            <>
-              <Link className='signedin' to='/users/signup'>Sign Up</Link>
-              <Link className='signedin' to='/users/signin'>Sign In</Link>
-             </>
+            <ul className="header--signedout">
+              <li><Link className="header--signedin" to='/users/signup'>Sign Up</Link></li>
+              <li><Link className='signedin' to='/users/signin'>Sign In</Link></li>
+             </ul>
              : 
-             <>
-               <span>Welcome {authUser.firstName} {authUser.lastName}!</span>
-               <button onClick = {handleUserSignOut}>Sign Out</button>
-             </>
+             <ul className="header--signedin">
+               <li>Welcome {authUser.firstName} {authUser.lastName}!</li>
+               <li><button onClick={handleUserSignOut}>Sign Out</button></li>
+             </ul>
             }
         </nav>
     );

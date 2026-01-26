@@ -17,6 +17,7 @@ const CourseUpdate = () => {
 
     console.log(id);
 
+    //Fetch existing course data, set state
     useEffect(() => {
         const fetchCourses = async () => {
             try {
@@ -31,6 +32,7 @@ const CourseUpdate = () => {
         fetchCourses();
     }, []);
 
+    //On form submit, pass creds and body to api helper to update course
     const handleSubmit = async (e) => {
         e.preventDefault();
         const credentials = {
@@ -61,11 +63,13 @@ const CourseUpdate = () => {
         }
     }
 
+    //Redirect to root route on cancel
     const handleCancel = (e) =>{
         e.preventDefault();
         navigate('/');
     }
 
+    //Don't render html until data is ready
     if (!course) return <p>Loading...</p>;
 
     return (

@@ -14,6 +14,7 @@ const CourseCreate = () => {
     const estimatedTime = useRef();
     const materialsNeeded = useRef();
 
+    //On form submit, pass creds and body to api helper to create new course
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -52,7 +53,7 @@ const CourseCreate = () => {
         }
     }
 
-
+    //Redirect to root route on cancel
     const handleCancel = (e) => {
         e.preventDefault();
         navigate('/');

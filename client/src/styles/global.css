@@ -46,8 +46,12 @@ header {
 header li {
     font-size: .8rem;
 }
-header nav a {
+header nav a,
+header nav button {
     color: #dbd;
+    background: none;
+    border: none;
+    font-size: 0.8rem;
 }
 header nav a:hover {
     color: #fff;
