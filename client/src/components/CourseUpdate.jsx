@@ -1,8 +1,8 @@
 import { useEffect, useContext, useRef, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import api from '../utils/apiHelper';
+import api from '../../utils/apiHelper';
 import UserContext from '../../context/UserContext';
-import Errors from './Errors';
+import Error from './Error';
 
 const CourseUpdate = () => {
     const [course, setCourse] = useState();
@@ -70,26 +70,26 @@ const CourseUpdate = () => {
 
     return (
         <>
-       <div class="wrap">
+       <div className="wrap">
                 <h2>Update Course</h2>
                 <Error errors = {errors} />
                 <form onSubmit = {handleSubmit}>
                     <div className="main--flex">
                         <div>
-                            <label for="courseTitle">Course Title</label>
-                            <input id="courseTitle" name="courseTitle" type="text" value= {course.title} />
+                            <label htmlFor="courseTitle">Course Title</label>
+                            <input id="courseTitle" name="courseTitle" type="text" ref= {title} defaultValue= {course.title} />
 
                             <p>By {course.User.firstname} {course.User.lastName}</p>
 
-                            <label for="courseDescription">Course Description</label>
-                            <textarea id="courseDescription" name="courseDescription">{course.description}</textarea>
+                            <label htmlFor="courseDescription">Course Description</label>
+                            <textarea id="courseDescription" name="courseDescription" ref = {description} defaultValue= {course.description}></textarea>
                         </div>
                         <div>
-                            <label for="estimatedTime">Estimated Time</label>
-                            <input id="estimatedTime" name="estimatedTime" type="text" value= {course.estimatedTime} />
+                            <label htmlFor="estimatedTime">Estimated Time</label>
+                            <input id="estimatedTime" name="estimatedTime" type="text" ref= {estimatedTime} defaultValue= {course.estimatedTime} />
 
-                            <label for="materialsNeeded">Materials Needed</label>
-                            <textarea id="materialsNeeded" name="materialsNeeded">{course.materialsNeeded}</textarea>
+                            <label htmlFor="materialsNeeded">Materials Needed</label>
+                            <textarea id="materialsNeeded" name="materialsNeeded" ref = {materialsNeeded} defaultValue= {course.materialsNeeded}></textarea>
                         </div>
                     </div>
                     <button className="button" type="submit">Update Course</button>
@@ -97,7 +97,6 @@ const CourseUpdate = () => {
                 </form>
             </div>
         </>
-
     )
 };
 

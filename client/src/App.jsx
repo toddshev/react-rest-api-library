@@ -8,8 +8,8 @@ import CourseDetails from './components/CourseDetails.jsx';
 import CourseCreate from './components/CourseCreate.jsx';
 import CourseUpdate from './components/CourseUpdate.jsx';
 import CourseDelete from './components/CourseDelete.jsx';
-import SignUp from './components/SignUp.jsx';
-import SignIn from './components/SignIn.jsx';
+import UserSignUp from './components/UserSignUp.jsx';
+import UserSignIn from './components/UserSignIn.jsx';
 
 const App = () => {
   return (
@@ -19,10 +19,10 @@ const App = () => {
         <Route path = "/" element = {<Courses />} />
         <Route path = "/courses/:id" element = {<CourseDetails />} />
         <Route path = "/courses/:id/update" element = {<CourseUpdate />} />
-        <Route path = "/courses" element = {<CourseCreate />} />
+        <Route path = "/courses/create" element = {<CourseCreate />} />
         <Route path = "/courses/:id/delete" element = {<CourseDelete />} />
-        <Route path = "/users/signup" element = {<SignUp />} />
-        <Route path = "/users/signin" element = {<SignIn />} />
+        <Route path = "/users/signup" element = {<UserSignUp />} />
+        <Route path = "/users/signin" element = {<UserSignIn />} />
       </Routes>
       {/* <Courses /> */}
     </>

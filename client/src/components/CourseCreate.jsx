@@ -1,7 +1,8 @@
 import { useState, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
-import api from '../utils/apiHelper';
+import Error from './Error';
+import api from '../../utils/apiHelper';
 
 
 const CourseCreate = () => {
@@ -15,6 +16,7 @@ const CourseCreate = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const credentials = {
             emailAddress: authUser.emailAddress,
             password: authUser.password,        
@@ -31,7 +33,7 @@ const CourseCreate = () => {
         try {
             const response = await api('/courses', "POST", body, credentials);
             if (response.status === 201) {
-                const location = await response.headers.get('Location');
+                const location = response.headers.get('Location');
                 if (location) {
                     navigate(location);
                 } else {
@@ -65,16 +67,16 @@ const CourseCreate = () => {
                     <div className="main--flex">
                         <div>
                             <label htmlFor="courseTitle">Course Title</label>
-                            <input id="courseTitle" name="courseTitle" type="text" value="" ref = {title} />
-
+                            <input id="courseTitle" name="courseTitle" type="text" ref = {title} />
+                            {authUser &&
                             <p>By {authUser.firstName} {authUser.lastName}</p>
-
+}
                             <label htmlFor="courseDescription">Course Description</label>
                             <textarea id="courseDescription" name="courseDescription" ref = {description}></textarea>
                         </div>
                         <div>
                             <label htmlFor="estimatedTime">Estimated Time</label>
-                            <input id="estimatedTime" name="estimatedTime" type="text" value="" ref = {estimatedTime} />
+                            <input id="estimatedTime" name="estimatedTime" type="text" ref = {estimatedTime} />
 
                             <label htmlFor="materialsNeeded">Materials Needed</label>
                             <textarea id="materialsNeeded" name="materialsNeeded" ref = {materialsNeeded}></textarea>

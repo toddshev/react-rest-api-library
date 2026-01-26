@@ -210,6 +210,11 @@ input:focus, button:focus, .button:focus, textarea:focus {
         margin-left: .5rem;
         line-height: 1;
     }
+    .signedin {
+        display: inline-block;
+        margin-left: 1rem;
+        line-height: 1;
+    }
     .main--grid {
         display: grid;
         grid-template-columns: 1fr 1fr;

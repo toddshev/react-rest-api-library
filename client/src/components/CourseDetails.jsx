@@ -1,36 +1,60 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-
+import { useEffect, useState, useContext } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import UserContext from '../../context/UserContext';
+import { api } from '../../utils/apiHelper';
 
 const CourseDetails = () => {
     const [courseDetails, setCourseDetails] = useState();
+    const navigate = useNavigate();
     const { id } = useParams();
+    const { authUser } = useContext(UserContext);
     console.log(id);
 
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/courses/${id}`);
+                const response = await api(`/courses/${id}`, "GET");
                 const data = await response.json();
-                setCourseDetails(data);
-                console.log(data);
+                setCourseDetails(data);   
             } catch (error) {
-                console.error('Error fetching courses:', error);
+                console.log('Error fetching course:', error);
             }
         };
         fetchCourses();
     }, []);
 
+    const handleDelete = async (e) => {
+        e.preventDefault();
+
+        const credentials = {
+            emailAddress: authUser.emailAddress,
+            password: authUser.password,
+        }
+
+        try {
+            const response = await api(`/courses/${id}`, "DELETE", null,credentials);
+            if (response.ok) {
+                console.log(`Course ${courseDetails.title} has been deleted`);
+                navigate('/');
+            } else {
+                console.log(response.status);
+                navigate('/error');
+            }
+        } catch (error) {
+            console.log(error);
+            navigate('/error');
+        }
+    }
+
     if (!courseDetails) return <p>Loading...</p>;
 
   
-    console.log(courseDetails);
     return (
         <>
         <div className="actions--bar">
                 <div className="wrap">
                     <Link className="button" to={`/courses/${id}/update`}>Update Course</Link>
-                    <Link className="button" to={`/courses/${id}/delete`}>Delete Course</Link>
+                    <Link className="button" to= '#' onClick={handleDelete}>Delete Course</Link>
                     <Link className="button button-secondary" to={"/"}>Return to List</Link>
                 </div>
             </div>
