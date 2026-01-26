@@ -1,9 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import UserContext from '../../context/UserContext';
 
+
+
 const NavBar = () => {
-    const { authUser } = useContext(UserContext);
+    const { authUser, actions } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    const handleUserSignOut = () => {
+        actions.signOut();
+        navigate('/');
+    }
+
     return (
         <nav>
             {!authUser ?
@@ -14,7 +23,7 @@ const NavBar = () => {
              : 
              <>
                <span>Welcome {authUser.firstName} {authUser.lastName}!</span>
-               <Link className = 'signedin' to= '/users/signout'>Sign Out</Link>
+               <Link className = 'signedin' to = "#" onClick = {handleUserSignOut}>Sign Out</Link>
              </>
             }
         </nav>

@@ -49,9 +49,9 @@ const UserSignIn = () => {
                 <Error errors= {errors} />
                 <form onSubmit= {handleSubmit}>
                     <label htmlFor="emailAddress">Email Address</label>
-                    <input id="emailAddress" name="emailAddress" type="email" />
+                    <input id="emailAddress" name="emailAddress" ref = {emailAddress} type="email" />
                     <label htmlFor="password">Password</label>
-                    <input id="password" name="password" type="password" />
+                    <input id="password" name="password" ref = {password} type="password" />
                     <button className="button" type="submit">Sign In</button>
                     <button className="button button-secondary" onClick={handleCancel}>Cancel</button>
                 </form>

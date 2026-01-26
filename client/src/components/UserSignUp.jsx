@@ -10,10 +10,10 @@ const UserSignUp = () => {
     const { actions } = useContext(UserContext);
     const [errors, setErrors] = useState([]);
 
-    const firstName = useRef();
-    const lastName = useRef();
-    const emailAddress = useRef();
-    const password = useRef();
+    const firstName = useRef(null);
+    const lastName = useRef(null);
+    const emailAddress = useRef(null);
+    const password = useRef(null);
 
 
     const handleSubmit = async (e) => {
@@ -52,6 +52,8 @@ const UserSignUp = () => {
         navigate('/');
     }
 
+    if (!firstName) <p>Loading...</p>
+
     return (
         <>
         <div className="form--centered">
@@ -59,13 +61,13 @@ const UserSignUp = () => {
             <Error errors= {errors} />
             <form onSubmit= {handleSubmit}>
                 <label htmlFor="firstName">First Name</label>
-                <input id="firstName" name="firstName" type="text" />
+                <input id="firstName" name="firstName" ref = {firstName}type="text" />
                 <label htmlFor="lastName">Last Name</label>
-                <input id="lastName" name="lastName" type="text" />
+                <input id="lastName" name="lastName" ref = {lastName} type="text" />
                 <label htmlFor="emailAddress">Email Address</label>
-                <input id="emailAddress" name="emailAddress" type="email" />
+                <input id="emailAddress" name="emailAddress" ref = {emailAddress} type="email" />
                 <label htmlFor="password">Password</label>
-                <input id="password" name="password" type="password" />
+                <input id="password" name="password" ref = {password} type="password" />
                 <button className="button" type="submit">Sign Up</button>
                 <button className="button button-secondary" onClick={handleCancel}>Cancel</button>
             </form>
