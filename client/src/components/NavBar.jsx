@@ -8,7 +8,8 @@ const NavBar = () => {
     const { authUser, actions } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const handleUserSignOut = () => {
+    const handleUserSignOut = (e) => {
+        e.preventDefault();
         actions.signOut();
         navigate('/');
     }
@@ -23,7 +24,7 @@ const NavBar = () => {
              : 
              <>
                <span>Welcome {authUser.firstName} {authUser.lastName}!</span>
-               <Link className = 'signedin' to = "#" onClick = {handleUserSignOut}>Sign Out</Link>
+               <button onClick = {handleUserSignOut}>Sign Out</button>
              </>
             }
         </nav>
