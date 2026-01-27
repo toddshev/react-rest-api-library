@@ -12,8 +12,9 @@ export const UserProvider = (props) => {
     const response = await api("/users", "GET", null, credentials);
     if (response.status === 200) {
       const user = await response.json();
+      user.password = credentials.password;
       setAuthUser(user);
-      Cookies.set("authenticatedUser", JSON.stringify(user),{expires: 1});
+      Cookies.set("authenticatedUser", JSON.stringify(user),{expires: 7});
       return user;
     }
     else if (response.status === 401) {

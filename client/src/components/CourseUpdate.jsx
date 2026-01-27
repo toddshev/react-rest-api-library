@@ -8,14 +8,15 @@ const CourseUpdate = () => {
     const [course, setCourse] = useState();
     const { id } = useParams();
     const navigate = useNavigate();
-    const authUser = useContext(UserContext);
+    const { authUser } = useContext(UserContext);
     const [errors, setErrors] = useState([]);
     const title = useRef();
     const description = useRef();
     const estimatedTime = useRef();
     const materialsNeeded = useRef();
 
-    console.log(id);
+    console.log('course id: ' + id);
+
 
     //Fetch existing course data, set state
     useEffect(() => {
@@ -35,10 +36,12 @@ const CourseUpdate = () => {
     //On form submit, pass creds and body to api helper to update course
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const credentials = {
             emailAddress: authUser.emailAddress,
             password: authUser.password,
         }
+
         const body = {
             title: title.current.value,
             description: description.current.value,
@@ -72,6 +75,7 @@ const CourseUpdate = () => {
     //Don't render html until data is ready
     if (!course) return <p>Loading...</p>;
 
+    //Render course form.  Only show Update button if user id matches course
     return (
         <>
        <div className="wrap">
@@ -96,7 +100,10 @@ const CourseUpdate = () => {
                             <textarea id="materialsNeeded" name="materialsNeeded" ref = {materialsNeeded} defaultValue= {course.materialsNeeded}></textarea>
                         </div>
                     </div>
-                    <button className="button" type="submit">Update Course</button>
+                    {course.User.id === authUser.id ?
+                        <button className="button" type="submit">Update Course</button>
+                        : null
+                    }
                     <button className="button button-secondary" onClick={handleCancel}>Cancel</button>
                 </form>
             </div>

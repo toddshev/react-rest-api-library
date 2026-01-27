@@ -28,18 +28,13 @@ const CourseCreate = () => {
             description: description.current.value,
             estimatedTime: estimatedTime.current.value,
             materialsNeeded: materialsNeeded.current.value,
-            userID: authUser.id,
+            userId: authUser.id,
         }
 
         try {
             const response = await api('/courses', "POST", body, credentials);
             if (response.status === 201) {
-                const location = response.headers.get('Location');
-                if (location) {
-                    navigate(location);
-                } else {
-                    console.log('Could not find location for redirect');
-                }
+                navigate('/')
             } else if (response.status === 400) {
                 const data = await response.json();
                 setErrors(data.errors);
@@ -71,7 +66,7 @@ const CourseCreate = () => {
                             <input id="courseTitle" name="courseTitle" type="text" ref = {title} />
                             {authUser &&
                             <p>By {authUser.firstName} {authUser.lastName}</p>
-}
+                            }
                             <label htmlFor="courseDescription">Course Description</label>
                             <textarea id="courseDescription" name="courseDescription" ref = {description}></textarea>
                         </div>
@@ -88,9 +83,7 @@ const CourseCreate = () => {
                 </form>
             </div>
         </>
-
     )
-
 }
 
 export default CourseCreate;
