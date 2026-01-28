@@ -79,7 +79,7 @@ const CourseDetails = () => {
                         <div>
                             <h3 className="course--detail--title">Course</h3>
                             <h4 className="course--name">{courseDetails.title}</h4>
-                            <p>By {authUser.firstName} {authUser.lastName}</p>
+                            <p>By {courseDetails.User.firstName} {courseDetails.User.lastName}</p>
                             <ReactMarkdown>{courseDetails.description}</ReactMarkdown>
                         </div>
                         <div>
