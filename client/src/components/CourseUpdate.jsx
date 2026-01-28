@@ -1,9 +1,8 @@
 import { useEffect, useContext, useRef, useState } from 'react';
-import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import api from '../../utils/apiHelper';
 import UserContext from '../../context/UserContext';
 import Error from './Error';
-import Forbidden from '../components/Forbidden';
 
 const CourseUpdate = () => {
     const [course, setCourse] = useState();

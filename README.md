@@ -1,16 +1,36 @@
-# React + Vite
+# Course Library with React Front End and Express Back End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Notes:** Vite was used for the build.  If run locally it requires two localhosts at port 5000 and 5173, respectively.  Install all node dependencies via npm install.
+DB operations are carried out by Sequelize ORM and a Sqlite database.
+Config is set to dev. Adjustments must be made for a production build.
 
-Currently, two official plugins are available:
+## Express API
+#### Endpoints
+- GET users (retrieve all)
+- POST users (create new)
+- GET courses (retrieve all)
+- GET courses/:id (retrieve single course)
+- POST courses (create new)
+- PUT courses/:id (update course)
+- DELETE courses/:id (delete course)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## React Functionality
+- Login/Authentication
+- Authorization required for specific routes
+- Standard CRUD operations
+- Robust error handling
 
-## React Compiler
+#### Routes
+- / (root - courses)
+- /courses/:id (details)
+- /courses/:id/update (private - update)
+- /courses/create (private - create)
+- /users/signup (sign-up)
+- /users/signin (sign in)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+##### Error Routes
+- /notfound
+- /forbidden
+- /error
+- \* (not found)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.

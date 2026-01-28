@@ -27,7 +27,7 @@ const Courses = () => {
     }, []);
 
     if (!courses) return <p>Loading...</p>
-
+    //Display all courses, and an option for adding a new one
     return (
         <div className="wrap main--grid">
             {courses.map(course => (

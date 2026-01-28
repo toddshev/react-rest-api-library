@@ -53,6 +53,7 @@ const UserSignUp = () => {
     //Wait for data to return before rendering component
     if (!firstName) <p>Loading...</p>
 
+    //Render sign-up form
     return (
         <>
         <div className="form--centered">

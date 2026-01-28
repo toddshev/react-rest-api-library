@@ -61,7 +61,7 @@ const CourseDetails = () => {
 
     //Wait for data to be returned before rendering component
     if (!courseDetails) return <p>Loading...</p>;
-    //Verify user is logged in
+
         return (
             <>
             <div className="actions--bar">
