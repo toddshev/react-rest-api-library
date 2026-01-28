@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+//Root route
 const Courses = () => {
     const [courses, setCourses] = useState([]);
     const navigate = useNavigate();
 
-
+    //Fetch all courses, set state
     useEffect(() => {
         const fetchCourses = async () => {
             try {
@@ -22,6 +23,7 @@ const Courses = () => {
             }
         };
         fetchCourses();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (!courses) return <p>Loading...</p>

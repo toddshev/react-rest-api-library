@@ -4,11 +4,11 @@ import UserContext from '../../context/UserContext';
 import Error from './Error';
 import api from '../../utils/apiHelper';
 
-
 const CourseCreate = () => {
     const { authUser } = useContext(UserContext);
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
+    //For form variables
     const title = useRef();
     const description = useRef();
     const estimatedTime = useRef();
@@ -31,6 +31,7 @@ const CourseCreate = () => {
             userId: authUser.id,
         }
 
+        //Send POST request to add course to db
         try {
             const response = await api('/courses', "POST", body, credentials);
             if (response.status === 201) {
@@ -54,6 +55,7 @@ const CourseCreate = () => {
         navigate('/');
     }
 
+    //Render form to create course
     return (
         <>
         <div className="wrap">
@@ -83,7 +85,7 @@ const CourseCreate = () => {
                 </form>
             </div>
         </>
-    )
+    );
 }
 
 export default CourseCreate;

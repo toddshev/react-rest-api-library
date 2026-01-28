@@ -7,16 +7,18 @@ import { api } from '../../utils/apiHelper';
 const CourseDetails = () => {
     const [courseDetails, setCourseDetails] = useState();
     const navigate = useNavigate();
+    //Course id
     const { id } = useParams();
     const { authUser } = useContext(UserContext);
 
+    //Fetch course details based on id passed in
     useEffect(() => {
         const fetchCourses = async () => {
             try {
                 const response = await api(`/courses/${id}`, "GET");
                 if (response.ok) {
-                const data = await response.json();
-                setCourseDetails(data);
+                    const data = await response.json();
+                    setCourseDetails(data);
                 } else if (response.status === 404) {
                     navigate('/notfound');
                 } else {
@@ -31,6 +33,7 @@ const CourseDetails = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    //Delete course from db as long as credentials from authUser match
     const handleDelete = async (e) => {
         e.preventDefault();
 
@@ -56,8 +59,10 @@ const CourseDetails = () => {
         }
     }
 
+    //Wait for data to be returned before rendering component
     if (!courseDetails) return <p>Loading...</p>;
 
+    //Verify user is logged in
     if (authUser) {
         return (
             <>
@@ -96,6 +101,7 @@ const CourseDetails = () => {
         </>
         )
     } else {
+        //Display below if user is not logged in
         return (
             <>
                 <h2>No courses available to view</h2>
