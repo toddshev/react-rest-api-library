@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import api from '../../utils/apiHelper';
 import UserContext from '../../context/UserContext';
 import Error from './Error';
+import Forbidden from '../components/Forbidden';
 
 const CourseUpdate = () => {
     const [course, setCourse] = useState();
@@ -23,15 +24,22 @@ const CourseUpdate = () => {
         const fetchCourses = async () => {
             try {
                 const response = await api(`/courses/${id}`, "GET");
-                const data = await response.json();
-                setCourse(data);
-                console.log(data);
+                if (response.ok) {
+                    const data = await response.json();
+                    setCourse(data);
+                    console.log(data);
+                }else if (response.status === 404) {
+                    navigate('/notfound');
+                } else {
+                    throw new Error();
+                }
             } catch (error) {
                 console.error('Error fetching courses:', error);
-                navigate('/notfound');
+                navigate('/error');
             }
         };
         fetchCourses();
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -52,6 +60,9 @@ const CourseUpdate = () => {
         }
 
         try {
+            if (!authUser.id === course.User.id) {
+                navigate('/forbidden');
+            } else {
             const response = await api(`/courses/${id}`, "PUT", body, credentials);
             if (response.ok) {
                 navigate(`/courses/${id}`);
@@ -62,6 +73,7 @@ const CourseUpdate = () => {
             } else {
                 throw new Error();
             }
+        }
         } catch (error) {
             console.log(error);
             navigate('/notfound');
@@ -78,9 +90,10 @@ const CourseUpdate = () => {
     if (!course) return <p>Loading...</p>;
 
     //Render course form.  Only display if user id matches course
-    if (course.User.id === authUser.id ){
+   // if (course.User.id === authUser.id ){
         return (
         <>
+        {course.User.id ===authUser.id ?
             <div className="wrap">
                 <h2>Update Course</h2>
                 <Error errors = {errors} />
@@ -103,18 +116,17 @@ const CourseUpdate = () => {
                             <textarea id="materialsNeeded" name="materialsNeeded" ref = {materialsNeeded} defaultValue= {course.materialsNeeded}></textarea>
                         </div>
                     </div>
-                    {course.User.id === authUser.id ?
+                  
                         <button className="button" type="submit">Update Course</button>
-                        : null
-                    }
+                  
                     <button className="button button-secondary" onClick={handleCancel}>Cancel</button>
                 </form>
             </div>
+            :
+            <Forbidden />
+        }
         </>
         )
-    }else {
-        navigate('/forbidden');
-    }
 };
 
 export default CourseUpdate;

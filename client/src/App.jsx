@@ -7,7 +7,6 @@ import Courses from './components/Courses.jsx';
 import CourseDetails from './components/CourseDetails.jsx';
 import CourseCreate from './components/CourseCreate.jsx';
 import CourseUpdate from './components/CourseUpdate.jsx';
-import CourseDelete from './components/CourseDelete.jsx';
 import UserSignUp from './components/UserSignUp.jsx';
 import UserSignIn from './components/UserSignIn.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
@@ -27,12 +26,11 @@ const App = () => {
           <Route path = "/courses/:id/update" element = {<CourseUpdate />} />
           <Route path = "/courses/create" element = {<CourseCreate />} />
         </Route>
-        <Route path = "/courses/:id/delete" element = {<CourseDelete />} />
         <Route path = "/users/signup" element = {<UserSignUp />} />
         <Route path = "/users/signin" element = {<UserSignIn />} />
         <Route path = "/notfound" element = {<NotFound />} />
         <Route path = "forbidden" element = {<Forbidden />} />
-        <Route path = "/unhandlederror" element = {<UnhandledError />} />
+        <Route path = "/error" element = {<UnhandledError />} />
         <Route path = "*" element = {<NotFound />} />
       </Routes>
     </>

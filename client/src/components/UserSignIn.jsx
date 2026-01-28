@@ -35,7 +35,7 @@ const UserSignIn = () => {
             }
         } catch (error) {
             console.log(error);
-            navigate('/unhandlederror');
+            navigate('/error');
         }
     }
 
