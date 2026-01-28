@@ -1,3 +1,5 @@
+//Helper function to make internal api calls more consistent and less verbose
+
 export const api = (
     path, 
     method = "GET", 

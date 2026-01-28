@@ -1,16 +1,13 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import UserContext from '../../context/UserContext';
 
-
-
+//nav bar for header - dynamically changes based on auth
 const NavBar = () => {
     const { authUser, actions } = useContext(UserContext);
-    const navigate = useNavigate();
-
+   
     const handleUserSignOut = () => {
         actions.signOut();
-        navigate('/');
     }
 
     return (

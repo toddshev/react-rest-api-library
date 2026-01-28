@@ -1,7 +1,6 @@
-import { Routes, Route } from 'react-router-dom';
-//Failed to resolve import 'react-router-dom' from 'src/App.jsx'
-//Does the file exist?
+import { Routes, Route, Navigate } from 'react-router-dom';
 
+//Load all components
 import Header from './components/Header.jsx'
 import Courses from './components/Courses.jsx';
 import CourseDetails from './components/CourseDetails.jsx';
@@ -14,7 +13,7 @@ import NotFound from './components/NotFound.jsx';
 import Forbidden from './components/Forbidden.jsx';
 import UnhandledError from './components/UnhandledError.jsx';
 
-
+//Set up routes - private for update and create
 const App = () => {
   return (
     <>
@@ -31,7 +30,7 @@ const App = () => {
         <Route path = "/notfound" element = {<NotFound />} />
         <Route path = "forbidden" element = {<Forbidden />} />
         <Route path = "/error" element = {<UnhandledError />} />
-        <Route path = "*" element = {<NotFound />} />
+        <Route path = "*" element = {<Navigate to = '/notfound' />} />
       </Routes>
     </>
   )

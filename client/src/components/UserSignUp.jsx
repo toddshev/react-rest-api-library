@@ -9,12 +9,11 @@ const UserSignUp = () => {
     const navigate = useNavigate();
     const { actions } = useContext(UserContext);
     const [errors, setErrors] = useState([]);
-
+    //Used in sign-up form
     const firstName = useRef(null);
     const lastName = useRef(null);
     const emailAddress = useRef(null);
     const password = useRef(null);
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,12 +25,12 @@ const UserSignUp = () => {
             password: password.current.value,
         }
 
+        //Attempt to create a new user on form submit
         try {
             const response = await api('/users', "POST", user, null);
             if (response.status === 201) {
                 console.log(`User ${user.firstName} ${user.lastName} has successfully been created!`);
                 await actions.signIn(user);
-                // destructuring needed?
                 navigate('/');
             } else if (response.status === 400) {
                 const data = await response.json();
@@ -46,12 +45,12 @@ const UserSignUp = () => {
         }
     }
 
-
     const handleCancel = (e) => {
         e.preventDefault();
         navigate('/');
     }
 
+    //Wait for data to return before rendering component
     if (!firstName) <p>Loading...</p>
 
     return (
@@ -62,12 +61,16 @@ const UserSignUp = () => {
             <form onSubmit= {handleSubmit}>
                 <label htmlFor="firstName">First Name</label>
                 <input id="firstName" name="firstName" ref = {firstName}type="text" />
+
                 <label htmlFor="lastName">Last Name</label>
                 <input id="lastName" name="lastName" ref = {lastName} type="text" />
+
                 <label htmlFor="emailAddress">Email Address</label>
                 <input id="emailAddress" name="emailAddress" ref = {emailAddress} type="email" />
+
                 <label htmlFor="password">Password</label>
                 <input id="password" name="password" ref = {password} type="password" />
+
                 <button className="button" type="submit">Sign Up</button>
                 <button className="button button-secondary" onClick={handleCancel}>Cancel</button>
             </form>

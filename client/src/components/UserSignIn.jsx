@@ -15,8 +15,8 @@ const UserSignIn = () => {
     const handleSubmit = async (e)  => {
         e.preventDefault();
 
+        //Sets redirect state to navigate user to the page they came from
         let from = '/';
-
         if (location.state) {
             from = location.state.from;
         }
@@ -26,6 +26,7 @@ const UserSignIn = () => {
             password: password.current.value,
         }
 
+        //Attempt to sign in user on form submit
         try {
             const user = await actions.signIn(credentials);
             if (user){
@@ -44,6 +45,7 @@ const UserSignIn = () => {
         navigate('/');
     }
 
+    //Renders sign-in form for users
     return (
         <>
         <div className="form--centered" >

@@ -1,7 +1,6 @@
-
+//Used in /error route. Generic error message for uncaught errors (typically 500).
 
 const UnhandledError = () => {
-
     return (
         <>
         <h2>Error has occurred</h2>

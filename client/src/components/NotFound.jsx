@@ -1,4 +1,4 @@
-
+//Used in /notfound route to display friendly message for 404's
 
 const NotFound = () => {
     return (

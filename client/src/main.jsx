@@ -6,6 +6,7 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { UserProvider } from '../context/UserContext.jsx'
 
+//Render App.jsx and root route - Strict for dev, UserProvider for UserContext
 createRoot(document.getElementById('root')).render(
   
   <StrictMode>

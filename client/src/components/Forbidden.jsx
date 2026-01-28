@@ -1,4 +1,4 @@
-
+//Display friendly message if routed to /forbidden or used in a component
 
 const Forbidden = () => {
     return (

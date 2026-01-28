@@ -1,3 +1,5 @@
+//Display validation errors in the component, if applicable
+
 const Error = ( {errors} ) => {
     let display = null;
 

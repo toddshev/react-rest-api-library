@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 
+//Standard header for entire app.  Uses NavBar subcomponent.
 const Header = () => {
     return (
         <>

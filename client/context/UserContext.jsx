@@ -4,6 +4,7 @@ import { api } from "../utils/apiHelper";
 
 const UserContext = createContext(null);
 
+//Set up UserContext to share auth data, as well as signin/signout functions across components
 export const UserProvider = (props) => {
   const cookie = Cookies.get("authenticatedUser");
   const [authUser, setAuthUser] = useState(cookie ? JSON.parse(cookie) : null );

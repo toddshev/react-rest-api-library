@@ -61,14 +61,12 @@ const CourseDetails = () => {
 
     //Wait for data to be returned before rendering component
     if (!courseDetails) return <p>Loading...</p>;
-
     //Verify user is logged in
-    if (authUser) {
         return (
             <>
             <div className="actions--bar">
                 <div className="wrap">
-                    {authUser.id === courseDetails.User.id &&
+                    {authUser && authUser.id === courseDetails.User.id &&
                     <>
                         <Link className="button" to={`/courses/${id}/update`}>Update Course</Link>
                         <Link className="button" to= '#' onClick={handleDelete}>Delete Course</Link>
@@ -100,15 +98,6 @@ const CourseDetails = () => {
             </div>
         </>
         )
-    } else {
-        //Display below if user is not logged in
-        return (
-            <>
-                <h2>No courses available to view</h2>
-                <p>Click here to <Link to='/users/signin'>Sign In</Link>!</p>
-            </>
-        )
-    }
 }
 
 
