@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown'
 import UserContext from '../../context/UserContext';
 import { api } from '../../utils/apiHelper';
 
@@ -9,6 +10,7 @@ const CourseDetails = () => {
     const { id } = useParams();
     const { authUser } = useContext(UserContext);
     console.log(id);
+
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -21,6 +23,7 @@ const CourseDetails = () => {
             }
         };
         fetchCourses();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleDelete = async (e) => {
@@ -38,11 +41,11 @@ const CourseDetails = () => {
                 navigate('/');
             } else {
                 console.log(response.status);
-                navigate('/error');
+                navigate('/notfound');
             }
         } catch (error) {
             console.log(error);
-            navigate('/error');
+            navigate('/notfound');
         }
     }
 
@@ -62,7 +65,7 @@ const CourseDetails = () => {
                     <Link className="button button-secondary" to={"/"}>Return to List</Link>
                 </div>
             </div>
-            
+            {authUser ?
             <div className="wrap">
                 <h2>Course Detail</h2>
                 <form>
@@ -71,21 +74,24 @@ const CourseDetails = () => {
                             <h3 className="course--detail--title">Course</h3>
                             <h4 className="course--name">{courseDetails.title}</h4>
                             <p>By {courseDetails.User.firstName} {courseDetails.User.lastName}</p>
-                            <p>{courseDetails.description}</p>
+                            <ReactMarkdown>{courseDetails.description}</ReactMarkdown>
                         </div>
                         <div>
                             <h3 className="course--detail--title">Estimated Time</h3>
                             <p>{courseDetails.estimatedTime}</p>
                             <h3 className="course--detail--title">Materials Needed</h3>
                             <ul className="course--detail--list">
-                                {courseDetails.materialsNeeded ? courseDetails.materialsNeeded.split('\n').map((item, index) => 
+                                {courseDetails.materialsNeeded && <ReactMarkdown>{courseDetails.materialsNeeded.split('\n').map((item, index) => 
                                     <li key = {index}>{item.indexOf("*") === 0 ? item.slice(1, item.length) : item}</li> // slice to remove extra asterisk
-                                ): null}                     
+                                )}</ReactMarkdown>}                     
                             </ul>
                         </div>
                     </div>
                 </form>
             </div>
+            :
+            <h2>No courses to display</h2>
+            }
         </>
     )
 }

@@ -28,9 +28,11 @@ const CourseUpdate = () => {
                 console.log(data);
             } catch (error) {
                 console.error('Error fetching courses:', error);
+                navigate('/notfound');
             }
         };
         fetchCourses();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     //On form submit, pass creds and body to api helper to update course
@@ -62,7 +64,7 @@ const CourseUpdate = () => {
             }
         } catch (error) {
             console.log(error);
-            navigate('/error');
+            navigate('/notfound');
         }
     }
 
@@ -75,10 +77,11 @@ const CourseUpdate = () => {
     //Don't render html until data is ready
     if (!course) return <p>Loading...</p>;
 
-    //Render course form.  Only show Update button if user id matches course
-    return (
+    //Render course form.  Only display if user id matches course
+    if (course.User.id === authUser.id ){
+        return (
         <>
-       <div className="wrap">
+            <div className="wrap">
                 <h2>Update Course</h2>
                 <Error errors = {errors} />
                 <form onSubmit = {handleSubmit}>
@@ -108,7 +111,10 @@ const CourseUpdate = () => {
                 </form>
             </div>
         </>
-    )
+        )
+    }else {
+        navigate('/forbidden');
+    }
 };
 
 export default CourseUpdate;

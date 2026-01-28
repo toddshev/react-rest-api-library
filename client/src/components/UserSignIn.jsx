@@ -7,16 +7,18 @@ import Error from './Error';
 const UserSignIn = () => {
     const navigate = useNavigate();
     const { actions } = useContext(UserContext);
-    const location = useLocation();
     const [errors, setErrors] = useState([]);
-    const [from, setFrom] = useState('/');
     const emailAddress = useRef();
     const password = useRef();
+    const location = useLocation();
 
     const handleSubmit = async (e)  => {
         e.preventDefault();
+
+        let from = '/';
+
         if (location.state) {
-            setFrom(location.state.from);
+            from = location.state.from;
         }
 
         const credentials = {
@@ -33,7 +35,7 @@ const UserSignIn = () => {
             }
         } catch (error) {
             console.log(error);
-            navigate('/error');
+            navigate('/unhandlederror');
         }
     }
 

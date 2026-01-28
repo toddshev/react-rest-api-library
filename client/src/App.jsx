@@ -30,14 +30,13 @@ const App = () => {
         <Route path = "/courses/:id/delete" element = {<CourseDelete />} />
         <Route path = "/users/signup" element = {<UserSignUp />} />
         <Route path = "/users/signin" element = {<UserSignIn />} />
-        
+        <Route path = "/notfound" element = {<NotFound />} />
         <Route path = "forbidden" element = {<Forbidden />} />
-        <Route path = "/error" element = {<UnhandledError />} />
+        <Route path = "/unhandlederror" element = {<UnhandledError />} />
         <Route path = "*" element = {<NotFound />} />
       </Routes>
     </>
   )
 }
-
 
 export default App
