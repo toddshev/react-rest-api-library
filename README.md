@@ -1,8 +1,8 @@
 # Course Library with React Front End and Express Back End
 
-**Notes:** Vite was used for the build.  If run locally it requires two localhosts at port 5000 and 5173, respectively.  Install all node dependencies via npm install.
+**Notes:** Vite was used for the build.  It is live at https://grand-gratitude-production-8d2e.up.railway.app/.  If you run locally it requires two localhosts at port 5000 and 5173, respectively, and the ports and url's will need to be adjusted.  Note it only has a few seed records at the moment.
+Install all node dependencies via npm install.
 DB operations are carried out by Sequelize ORM and a Sqlite database.
-Config is set to dev. Adjustments must be made for a production build.
 
 ## Express API
 #### Endpoints
@@ -33,4 +33,3 @@ Config is set to dev. Adjustments must be made for a production build.
 - /forbidden
 - /error
 - \* (not found)
-
